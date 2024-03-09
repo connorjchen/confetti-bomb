@@ -1,6 +1,4 @@
-# Frontend
-frontend/node_modules
+# ========== Frontend ==========
 
-frontend/.cache
-frontend/build
-frontend/public/build
+**/node_modules
+frontend/.next
