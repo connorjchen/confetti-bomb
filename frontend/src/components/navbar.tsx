@@ -1,9 +1,9 @@
-const NavBar = () => {
+export default function NavBar() {
   return (
     <div className="navbar">
-      <div className="flex-1">
-        <a className="btn btn-ghost text-xl">Confetti Bomb</a>
-      </div>
+      <a href="/home" className="flex-1">
+        <p className="font-bold text-xl">Confetti Bomb</p>
+      </a>
       <div className="flex-none">
         <div className="dropdown dropdown-end">
           <div
@@ -39,6 +39,4 @@ const NavBar = () => {
       </div>
     </div>
   );
-};
-
-export default NavBar;
+}
