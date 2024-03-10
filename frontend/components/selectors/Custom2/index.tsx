@@ -1,8 +1,8 @@
-import { Element, useNode } from '@craftjs/core';
-import React from 'react';
+import { Element, useNode } from "@craftjs/core";
+import React from "react";
 
-import { Container } from '../Container';
-import { Video } from '../Video';
+import { Container } from "../Container";
+import { Video } from "../Video";
 
 export const Custom2VideoDrop = ({ children }) => {
   const {
@@ -43,5 +43,5 @@ export const Custom2 = (props: any) => {
 
 Custom2.craft = {
   ...Container.craft,
-  displayName: 'Custom 2',
+  displayName: "Custom 2",
 };

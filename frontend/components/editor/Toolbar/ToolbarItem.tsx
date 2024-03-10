@@ -1,44 +1,44 @@
-import { useNode } from '@craftjs/core';
-import { Grid, Slider, RadioGroup } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
-import React from 'react';
+import { useNode } from "@craftjs/core";
+import { Grid, Slider, RadioGroup } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
+import React from "react";
 
-import { ToolbarDropdown } from './ToolbarDropdown';
-import { ToolbarTextInput } from './ToolbarTextInput';
+import { ToolbarDropdown } from "./ToolbarDropdown";
+import { ToolbarTextInput } from "./ToolbarTextInput";
 
 const iOSBoxShadow =
-  '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)';
+  "0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)";
 
 const SliderStyled = withStyles({
   root: {
-    color: '#3880ff',
+    color: "#3880ff",
     height: 2,
-    padding: '5px 0',
-    width: '100%',
+    padding: "5px 0",
+    width: "100%",
   },
   thumb: {
     height: 14,
     width: 14,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     boxShadow: iOSBoxShadow,
     marginTop: -7,
     marginLeft: -7,
-    '&:focus,&:hover,&$active': {
+    "&:focus,&:hover,&$active": {
       boxShadow:
-        '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
+        "0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)",
       // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
+      "@media (hover: none)": {
         boxShadow: iOSBoxShadow,
       },
     },
   },
   active: {},
   valueLabel: {
-    left: 'calc(-50% + 11px)',
+    left: "calc(-50% + 11px)",
     top: -22,
-    '& *': {
-      background: 'transparent',
-      color: '#000',
+    "& *": {
+      background: "transparent",
+      color: "#000",
     },
   },
   track: {
@@ -47,17 +47,17 @@ const SliderStyled = withStyles({
   rail: {
     height: 2,
     opacity: 0.5,
-    backgroundColor: '#bfbfbf',
+    backgroundColor: "#bfbfbf",
   },
   mark: {
-    backgroundColor: '#bfbfbf',
+    backgroundColor: "#bfbfbf",
     height: 8,
     width: 1,
     marginTop: -3,
   },
   markActive: {
     opacity: 1,
-    backgroundColor: 'currentColor',
+    backgroundColor: "currentColor",
   },
 })(Slider);
 
@@ -90,7 +90,7 @@ export const ToolbarItem = ({
   return (
     <Grid item xs={full ? 12 : 6}>
       <div className="mb-2">
-        {['text', 'color', 'bg', 'number'].includes(type) ? (
+        {["text", "color", "bg", "number"].includes(type) ? (
           <ToolbarTextInput
             {...props}
             type={type}
@@ -105,7 +105,7 @@ export const ToolbarItem = ({
               }, 500);
             }}
           />
-        ) : type === 'slider' ? (
+        ) : type === "slider" ? (
           <>
             {props.label ? (
               <h4 className="text-sm text-light-gray-2">{props.label}</h4>
@@ -127,7 +127,7 @@ export const ToolbarItem = ({
               }
             />
           </>
-        ) : type === 'radio' ? (
+        ) : type === "radio" ? (
           <>
             {props.label ? (
               <h4 className="text-sm text-light-gray-2">{props.label}</h4>
@@ -144,13 +144,13 @@ export const ToolbarItem = ({
               {props.children}
             </RadioGroup>
           </>
-        ) : type === 'select' ? (
+        ) : type === "select" ? (
           <ToolbarDropdown
-            value={value || ''}
+            value={value || ""}
             onChange={(value) =>
               setProp(
                 (props: any) =>
-                  (props[propKey] = onChange ? onChange(value) : value)
+                  (props[propKey] = onChange ? onChange(value) : value),
               )
             }
             {...props}

@@ -1,8 +1,8 @@
-import { Element, useNode } from '@craftjs/core';
-import React from 'react';
+import { Element, useNode } from "@craftjs/core";
+import React from "react";
 
-import { Button } from '../Button';
-import { Container } from '../Container';
+import { Button } from "../Button";
+import { Container } from "../Container";
 
 export const Custom3BtnDrop = ({ children }) => {
   const {
@@ -22,11 +22,11 @@ Custom3BtnDrop.craft = {
         data: { nodes },
       } = self;
       const btnNodes = nodes.filter(
-        (id) => helpers(id).get().data.type === Button
+        (id) => helpers(id).get().data.type === Button,
       );
 
       const outgoingButtonNodes = outgoingNodes.filter(
-        (node) => node.data.type === Button
+        (node) => node.data.type === Button,
       );
 
       if (outgoingButtonNodes.length < btnNodes.length) {
@@ -54,5 +54,5 @@ export const Custom3 = (props: any) => {
 
 Custom3.craft = {
   ...Container.craft,
-  displayName: 'Custom 3',
+  displayName: "Custom 3",
 };

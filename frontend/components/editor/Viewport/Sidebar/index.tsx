@@ -1,19 +1,19 @@
-import { useEditor } from '@craftjs/core';
-import { Layers } from '@craftjs/layers';
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import { useEditor } from "@craftjs/core";
+import { Layers } from "@craftjs/layers";
+import React, { useState } from "react";
+import styled from "styled-components";
 
-import { SidebarItem } from './SidebarItem';
+import { SidebarItem } from "./SidebarItem";
 
-import CustomizeIcon from '../../../../public/icons/customize.svg';
-import LayerIcon from '../../../../public/icons/layers.svg';
-import { Toolbar } from '../../Toolbar';
+import CustomizeIcon from "../../../../public/icons/customize.svg";
+import LayerIcon from "../../../../public/icons/layers.svg";
+import { Toolbar } from "../../Toolbar";
 
-export const SidebarDiv = styled.div<{ enabled: boolean }>`
+export const SidebarDiv = styled.div<{ $enabled: boolean }>`
   width: 280px;
-  opacity: ${(props) => (props.enabled ? 1 : 0)};
+  opacity: ${(props) => (props.$enabled ? 1 : 0)};
   background: #fff;
-  margin-right: ${(props) => (props.enabled ? 0 : -280)}px;
+  margin-right: ${(props) => (props.$enabled ? 0 : -280)}px;
 `;
 
 const CarbonAdsContainer = styled.div`
@@ -26,8 +26,8 @@ const CarbonAdsContainer = styled.div`
   }
 
   #carbonads {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-      Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial,
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial,
       sans-serif;
 
     padding: 10px 0.5rem;
@@ -110,20 +110,20 @@ const Carbonads = () => {
       return;
     }
 
-    const script = document.createElement('script');
-    script.setAttribute('type', 'text/javascript');
-    script.setAttribute('async', 'true');
+    const script = document.createElement("script");
+    script.setAttribute("type", "text/javascript");
+    script.setAttribute("async", "true");
 
     script.setAttribute(
-      'src',
-      '//cdn.carbonads.com/carbon.js?serve=CEAI453N&placement=craftjsorg'
+      "src",
+      "//cdn.carbonads.com/carbon.js?serve=CEAI453N&placement=craftjsorg",
     );
-    script.setAttribute('id', '_carbonads_js');
+    script.setAttribute("id", "_carbonads_js");
 
     dom.appendChild(script);
 
     return () => {
-      const ad = dom.querySelector('#carbonads');
+      const ad = dom.querySelector("#carbonads");
       if (ad) {
         dom.removeChild(ad);
       }
@@ -143,12 +143,12 @@ export const Sidebar = () => {
   }));
 
   return (
-    <SidebarDiv enabled={enabled} className="sidebar transition bg-white w-2">
+    <SidebarDiv $enabled={enabled} className="sidebar transition bg-white w-2">
       <div className="flex flex-col h-full">
         <SidebarItem
           icon={CustomizeIcon}
           title="Customize"
-          height={!layersVisible ? 'full' : '55%'}
+          height={!layersVisible ? "full" : "55%"}
           visible={toolbarVisible}
           onChange={(val) => setToolbarVisible(val)}
         >
@@ -157,7 +157,7 @@ export const Sidebar = () => {
         <SidebarItem
           icon={LayerIcon}
           title="Layers"
-          height={!toolbarVisible ? 'full' : '45%'}
+          height={!toolbarVisible ? "full" : "45%"}
           visible={layersVisible}
           onChange={(val) => setLayerVisible(val)}
         >

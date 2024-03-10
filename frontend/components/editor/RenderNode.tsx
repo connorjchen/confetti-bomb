@@ -1,12 +1,12 @@
-import { useNode, useEditor } from '@craftjs/core';
-import { ROOT_NODE } from '@craftjs/utils';
-import React, { useEffect, useRef, useCallback } from 'react';
-import ReactDOM from 'react-dom';
-import styled from 'styled-components';
+import { useNode, useEditor } from "@craftjs/core";
+import { ROOT_NODE } from "@craftjs/utils";
+import React, { useEffect, useRef, useCallback } from "react";
+import ReactDOM from "react-dom";
+import styled from "styled-components";
 
-import ArrowUp from '../../public/icons/arrow-up.svg';
-import Delete from '../../public/icons/delete.svg';
-import Move from '../../public/icons/move.svg';
+import ArrowUp from "../../public/icons/arrow-up.svg";
+import Delete from "../../public/icons/delete.svg";
+import Move from "../../public/icons/move.svg";
 
 const IndicatorDiv = styled.div`
   height: 30px;
@@ -36,7 +36,7 @@ const Btn = styled.a`
 export const RenderNode = ({ render }) => {
   const { id } = useNode();
   const { actions, query, isActive } = useEditor((_, query) => ({
-    isActive: query.getEvent('selected').contains(id),
+    isActive: query.getEvent("selected").contains(id),
   }));
 
   const {
@@ -61,8 +61,8 @@ export const RenderNode = ({ render }) => {
 
   useEffect(() => {
     if (dom) {
-      if (isActive || isHover) dom.classList.add('component-selected');
-      else dom.classList.remove('component-selected');
+      if (isActive || isHover) dom.classList.add("component-selected");
+      else dom.classList.remove("component-selected");
     }
   }, [dom, isActive, isHover]);
 
@@ -87,13 +87,13 @@ export const RenderNode = ({ render }) => {
 
   useEffect(() => {
     document
-      .querySelector('.craftjs-renderer')
-      .addEventListener('scroll', scroll);
+      .querySelector(".craftjs-renderer")
+      .addEventListener("scroll", scroll);
 
     return () => {
       document
-        .querySelector('.craftjs-renderer')
-        .removeEventListener('scroll', scroll);
+        .querySelector(".craftjs-renderer")
+        .removeEventListener("scroll", scroll);
     };
   }, [scroll]);
 
@@ -138,7 +138,7 @@ export const RenderNode = ({ render }) => {
                 </Btn>
               ) : null}
             </IndicatorDiv>,
-            document.querySelector('.page-container')
+            document.querySelector(".page-container"),
           )
         : null}
       {render}

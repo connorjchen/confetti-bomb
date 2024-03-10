@@ -1,28 +1,28 @@
-import { useNode } from '@craftjs/core';
+import { useNode } from "@craftjs/core";
 import {
   ExpansionPanel,
   ExpansionPanelDetails,
   ExpansionPanelSummary,
   Grid,
   Divider,
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import React from 'react';
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import React from "react";
 const usePanelStyles = makeStyles((_) => ({
   root: {
-    background: 'transparent',
-    boxShadow: 'none',
-    '&:before': {
-      backgroundColor: 'rgba(0, 0, 0, 0.05)',
+    background: "transparent",
+    boxShadow: "none",
+    "&:before": {
+      backgroundColor: "rgba(0, 0, 0, 0.05)",
     },
-    '&.Mui-expanded': {
-      margin: '0 0',
-      minHeight: '40px',
-      '&:before': {
-        opacity: '1',
+    "&.Mui-expanded": {
+      margin: "0 0",
+      minHeight: "40px",
+      "&:before": {
+        opacity: "1",
       },
-      '& + .MuiExpansionPanel-root:before ': {
-        display: 'block',
+      "& + .MuiExpansionPanel-root:before ": {
+        display: "block",
       },
     },
   },
@@ -30,11 +30,11 @@ const usePanelStyles = makeStyles((_) => ({
 
 const useSummaryStyles = makeStyles((_) => ({
   root: {
-    'min-height': '36px',
+    "min-height": "36px",
     padding: 0,
   },
   content: {
-    margin: '0px',
+    margin: "0px",
   },
 }));
 
@@ -66,7 +66,7 @@ export const ToolbarSection = ({ title, props, summary, children }: any) => {
                     props.reduce((acc: any, key: any) => {
                       acc[key] = nodeProps[key];
                       return acc;
-                    }, {})
+                    }, {}),
                   )}
                 </h5>
               </Grid>
@@ -74,7 +74,7 @@ export const ToolbarSection = ({ title, props, summary, children }: any) => {
           </Grid>
         </div>
       </ExpansionPanelSummary>
-      <ExpansionPanelDetails style={{ padding: '0px 24px 20px' }}>
+      <ExpansionPanelDetails style={{ padding: "0px 24px 20px" }}>
         <Divider />
         <Grid container spacing={1}>
           {children}
