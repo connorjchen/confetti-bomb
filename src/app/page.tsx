@@ -1,4 +1,4 @@
-export default function Home() {
+export default function Landing() {
   return (
     <section className="relative">
       {/* Illustration behind hero content */}
@@ -82,18 +82,18 @@ export default function Home() {
 
           {/* Hero image */}
           {/* <ModalVideo
-            thumb={VideoThumb}
-            thumbWidth={768}
-            thumbHeight={432}
-            thumbAlt="Modal video thumbnail"
-            video="/videos/video.mp4"
-            videoWidth={1920}
-            videoHeight={1080}\\\ https://github.com/cruip/tailwind-landing-page-template/blob/main/components/features.tsx
-            <Features />
-      <FeaturesBlocks />
-      <Testimonials />
-      <Newsletter />
-          /> */}
+        thumb={VideoThumb}
+        thumbWidth={768}
+        thumbHeight={432}
+        thumbAlt="Modal video thumbnail"
+        video="/videos/video.mp4"
+        videoWidth={1920}
+        videoHeight={1080}\\\ https://github.com/cruip/tailwind-landing-page-template/blob/main/components/features.tsx
+        <Features />
+  <FeaturesBlocks />
+  <Testimonials />
+  <Newsletter />
+      /> */}
         </div>
       </div>
     </section>

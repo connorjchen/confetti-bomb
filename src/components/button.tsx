@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 
 interface ButtonProps {
@@ -10,8 +8,10 @@ interface ButtonProps {
 
 export default function Button({ children, onClick, className }: ButtonProps) {
   return (
-    <button className={`btn btn-ghost text-xl ${className}`} onClick={onClick}>
-      {children}
-    </button>
+    <form action={onClick}>
+      <button type="submit" className={`btn ${className}`}>
+        {children}
+      </button>
+    </form>
   );
 }
