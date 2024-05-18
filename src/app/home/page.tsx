@@ -1,14 +1,10 @@
 import Button from "@/components/Button";
 import { H5 } from "@/components/Text";
 import Link from "next/link";
-import { auth } from "@/auth";
 
 export default async function Home() {
-  const session = await auth();
-
   async function createNewProject() {
     "use server";
-    console.log(session);
   }
 
   // look into using twMerge clsx cn correctly to merge classes
@@ -33,7 +29,6 @@ export default async function Home() {
           ))}
         </div>
       </div>
-      <pre>{JSON.stringify(session, null, 2)}</pre>
     </div>
   );
 }

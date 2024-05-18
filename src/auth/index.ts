@@ -3,17 +3,17 @@ import Credentials from "next-auth/providers/credentials";
 
 export const BASE_PATH = "/api/auth";
 
+// TODO(connor): implement Google provider
 const authOptions: NextAuthConfig = {
   providers: [
     Credentials({
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "text", placeholder: "connorjchen@gmail.com" },
+        email: { label: "Email", type: "text", placeholder: "test@test.com" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials): Promise<User | null> {
         // TODO(connor): replace with prisma db query
-        // TODO(connor): try headers and no headers - i assume header needed if backcend on different server
         const users = [
           {
             id: "test-user-1",
