@@ -1,30 +1,21 @@
 import NextAuth, { User, NextAuthConfig } from "next-auth";
-import Credentials from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 
 export const BASE_PATH = "/api/auth";
 
 // TODO(connor): implement Google provider
 const authOptions: NextAuthConfig = {
   providers: [
-    Credentials({
-      name: "Credentials",
-      credentials: {
-        email: { label: "Email", type: "text", placeholder: "test@test.com" },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(credentials): Promise<User | null> {
-        // TODO(connor): replace with prisma db query
-        const users = [
-          {
-            id: "test-user-1",
-            userName: "test1",
-            name: "Test 1",
-            password: "pass",
-            email: "test@test.com",
-          },
-        ];
-        const user = users.find((user) => user.email === credentials.email && user.password === credentials.password);
-        return user ? { id: user.id, name: user.name, email: user.email } : null;
+    GoogleProvider({
+      // TODO(connor): https://console.cloud.google.com/apis/credentials?project=intense-crow-423719-u1
+      clientId: process.env.GOOGLE_CLIENT_ID, // TODO(connor): will need to add prod url to authorized redirect URI on Oauth client id
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
       },
     }),
   ],

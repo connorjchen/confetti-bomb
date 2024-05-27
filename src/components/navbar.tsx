@@ -3,7 +3,7 @@ import AuthButton from "./AuthButton.server";
 
 export default function NavBar() {
   return (
-    <div className="navbar sticky top-0 mb-1 flex justify-between">
+    <div className="navbar top-0 mb-1 flex justify-between">
       <Link href="/home">
         <button className="btn">ConfettiBomb.me</button>
       </Link>

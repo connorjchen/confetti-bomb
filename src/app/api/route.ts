@@ -1,5 +1,6 @@
-import { NextResponse } from "next/server"
+import { NextResponse } from "next/server";
+import { SuccessResponse } from "./utils";
 
-export async function GET() {
-  return NextResponse.json({ message: "Hello, World!" })
+export async function GET(): Promise<NextResponse> {
+  return SuccessResponse({ message: "Hello, World!" });
 }
