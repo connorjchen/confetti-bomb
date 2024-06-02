@@ -5,13 +5,16 @@ import React from "react";
 
 type InputType = "text" | "number";
 
-interface Props {
+type Props = {
   placeholder?: string;
   type: InputType;
+  value?: string | number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
-}
+};
 
-export default function Input({ placeholder, onChange, className, type }: Props) {
-  return <input type={type} placeholder={placeholder} className={cn("input", className)} onChange={onChange} />;
+export default function Input({ placeholder, onChange, className, type, value }: Props) {
+  return (
+    <input type={type} placeholder={placeholder} className={cn("input", className)} onChange={onChange} value={value} />
+  );
 }

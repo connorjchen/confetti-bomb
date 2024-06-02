@@ -1,15 +1,17 @@
+import { cn } from "@/utils";
 import React from "react";
 
-interface Props {
+type Props = {
   children: React.ReactNode;
   onClick: () => void;
   className?: string;
-}
+  outline?: boolean;
+};
 
-export default function Button({ children, onClick, className }: Props) {
+export default function Button({ children, onClick, className, outline }: Props) {
   return (
     <form action={onClick}>
-      <button type="submit" className={`btn ${className}`}>
+      <button type="submit" className={cn("btn", className, { "btn-outline": outline })}>
         {children}
       </button>
     </form>

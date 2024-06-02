@@ -25,7 +25,7 @@ export default function RichTextEditor({
   });
 
   return (
-    <div className="w-full px-4">
+    <div className="w-full">
       <Toolbar editor={editor} />
       <EditorContent style={{ whiteSpace: "pre-line" }} editor={editor} />
     </div>

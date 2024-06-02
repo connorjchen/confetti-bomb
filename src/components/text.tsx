@@ -1,16 +1,10 @@
 import { cn } from "@/utils";
 
-interface Props {
-  className?: string;
-  bold?: boolean;
-  children: React.ReactNode;
-}
-
-interface Props {
+type Props = {
   className?: string;
   children: React.ReactNode;
   bold?: boolean;
-}
+};
 
 export function H1({ className, children, bold }: Props) {
   return <h1 className={cn("text-4xl", { "font-bold": bold }, className)}>{children}</h1>;
