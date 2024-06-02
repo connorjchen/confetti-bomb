@@ -1,5 +1,5 @@
 import Link from "next/link";
-import AuthButton from "./AuthButton.server";
+import AuthButton from "./AuthButton/AuthButton.server";
 
 export default function NavBar() {
   return (
