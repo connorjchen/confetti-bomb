@@ -6,7 +6,6 @@ import Button from "./Button";
 
 export default function FileUpload() {
   const inputFileRef = useRef<HTMLInputElement>(null);
-  const [blobUrl, setBlobUrl] = useState<string | null>(null);
 
   async function uploadFile() {
     if (!inputFileRef.current?.files) {
@@ -24,9 +23,6 @@ export default function FileUpload() {
       file,
       false
     );
-    const newBlobUrl = response as string;
-
-    setBlobUrl(newBlobUrl);
   }
 
   return (

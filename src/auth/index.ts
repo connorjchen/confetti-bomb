@@ -3,7 +3,6 @@ import GoogleProvider from "next-auth/providers/google";
 
 export const BASE_PATH = "/api/auth";
 
-// TODO(connor): implement Google provider
 const authOptions: NextAuthConfig = {
   providers: [
     GoogleProvider({

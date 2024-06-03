@@ -9,21 +9,27 @@ datasource db {
   url = env("POSTGRES_PRISMA_URL") // uses connection pooling
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
-
 model Bomb {
   id        String     @default(cuid()) @id
-  title     String     @default("Untitled")
-  content   String
-  author    User?   @relation(fields: [authorId], references: [id])
-  authorId  String?
+  fileName     String     @default("Untitled")
+  textContent   String
+  iconBlobUrl       String     @map("icon_blob_url")
+  confettiColors    String[] @map("confetti_colors")
+  confettiNumber    Int @map("confetti_number")
+  confettiRadius    Int @map(name: "confetti_radius")
+  author    User   @relation(fields: [authorId], references: [id])
+  authorId  String
+  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
+  @@map(name: "bombs")
 }
 
 model User {
   id            String       @default(cuid()) @id
-  name          String?
-  email         String?   @unique
+  name          String
+  email         String   @unique
+  bombs         Bomb[]
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
-  bombs         Bomb[]
   @@map(name: "users")
 }
