@@ -1,5 +1,5 @@
 "use client";
-import FileUpload from "@/components/FileUpload";
+import FileUpload, { UploadType } from "@/components/FileUpload";
 import HFlex from "@/components/HFlex";
 import Input from "@/components/Input";
 import RichTextEditor from "@/components/RichTextEditor/RichTextEditor";
@@ -133,12 +133,9 @@ export default function EditBombClient({ bomb: initialBomb, updateBomb }: Props)
           <HFlex itemsCenter className="gap-2">
             {bomb.iconBlobUrl ? (
               <>
-                <Image
-                  alt="logo"
-                  src="https://jdu1spj3hhoewnhk.public.blob.vercel-storage.com/00606_1fkFplPupwv_0b50ew_600x450-KZpyE1KEThZZEhR1EXx4jZp12qCDkx.jpg"
-                  width={100}
-                  height={100}
-                />
+                <div className="w-[150px] h-[75px] relative">
+                  <Image alt="logo" src={bomb.iconBlobUrl} layout="fill" objectFit="contain" />
+                </div>
                 <Button
                   outline
                   className="btn-black"
@@ -157,7 +154,7 @@ export default function EditBombClient({ bomb: initialBomb, updateBomb }: Props)
             ) : (
               <P>No Logo Uploaded</P>
             )}
-            <FileUpload />
+            <FileUpload bombId={bomb.id} uploadType={UploadType.LOGO} setBomb={setBomb} />
           </HFlex>
         </div>
         <div>
@@ -180,7 +177,7 @@ export default function EditBombClient({ bomb: initialBomb, updateBomb }: Props)
             <div>
               {bomb.confettiColors.map((color, index) => (
                 <HFlex itemsCenter key={index} className="gap-1">
-                  <P>Color {index + 1}</P>
+                  <P className="min-w-14">Color {index + 1}</P>
                   <button onClick={() => setSelectedColorIdx(index)}>
                     <ColorCircle color={color} size={40} border={index === selectedColorIdx} />
                   </button>
@@ -191,6 +188,7 @@ export default function EditBombClient({ bomb: initialBomb, updateBomb }: Props)
               className="!w-[245px]"
               color={bomb.confettiColors[selectedColorIdx]}
               onChange={(color) => {
+                // TODO(connor): broken, takes old selectedColorIdx for some reason..
                 setBomb((prev: Bomb) => {
                   return {
                     ...prev,

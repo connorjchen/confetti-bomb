@@ -1,6 +1,8 @@
 import { put } from "@vercel/blob";
 import { NextResponse } from "next/server";
 import { ErrorResponse, SuccessResponse } from "../utils";
+import { UploadType } from "@/components/FileUpload";
+import prisma from "@/lib/prisma";
 
 export async function POST(request: Request): Promise<NextResponse> {
   const { searchParams } = new URL(request.url);
@@ -12,10 +14,20 @@ export async function POST(request: Request): Promise<NextResponse> {
     return ErrorResponse("Missing one of following: file, bombId, uploadType, fileName");
   }
 
-  // TODO(connor): store this data somewhere in prisma and attachit to bomb object depending on the upload type
   const blob = await put(fileName, file, {
     access: "public",
   });
+
+  if (uploadType === UploadType.LOGO) {
+    await prisma.bomb.update({
+      where: {
+        id: bombId,
+      },
+      data: {
+        iconBlobUrl: blob.url,
+      },
+    });
+  }
 
   return SuccessResponse(blob.url);
 }

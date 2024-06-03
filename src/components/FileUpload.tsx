@@ -1,10 +1,21 @@
 "use client";
 
 import { postFetch } from "@/app/api/utils";
-import { useState, useRef } from "react";
+import React, { useRef } from "react";
 import Button from "./Button";
+import { Bomb } from "@prisma/client";
 
-export default function FileUpload() {
+export enum UploadType {
+  LOGO = "logo",
+}
+
+type Props = {
+  bombId: string;
+  uploadType: UploadType;
+  setBomb: React.Dispatch<React.SetStateAction<Bomb>>;
+};
+
+export default function FileUpload({ bombId, uploadType, setBomb }: Props) {
   const inputFileRef = useRef<HTMLInputElement>(null);
 
   async function uploadFile() {
@@ -18,11 +29,15 @@ export default function FileUpload() {
       throw new Error("Only png, jpg, and jpeg files are allowed.");
     }
 
-    const response = await postFetch(
-      `/api/upload?bombId=${123}&uploadType=${"logo"}&fileName=${file.name}`,
+    const blobUrl = await postFetch(
+      `/api/upload?bombId=${bombId}&uploadType=${uploadType}&fileName=${file.name}`,
       file,
       false
     );
+    setBomb((prev) => ({
+      ...prev,
+      iconBlobUrl: blobUrl,
+    }));
   }
 
   return (
