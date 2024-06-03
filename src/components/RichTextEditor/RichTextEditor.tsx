@@ -19,6 +19,7 @@ export default function RichTextEditor({
         class: "unreset-css p-4 border-b border-r border-l border-black rounded-bl-md rounded-br-md outline-none",
       },
     },
+    content: content,
     onUpdate: ({ editor }) => {
       updateContent(editor.getHTML());
     },

@@ -6,7 +6,7 @@ import RichTextEditor from "@/components/RichTextEditor/RichTextEditor";
 import { P } from "@/components/Text";
 import VFlex from "@/components/VFlex";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import JSConfetti from "js-confetti";
 import { Compact } from "@uiw/react-color";
 import ColorCircle from "@/components/ColorCircle";
@@ -61,6 +61,7 @@ type Props = {
 
 export default function EditBombClient({ bomb: initialBomb, updateBomb }: Props) {
   const [selectedColorIdx, setSelectedColorIdx] = useState(0);
+  const selectedColorIdxRef = useRef(selectedColorIdx);
   const [bomb, setBomb] = useState(initialBomb);
   const [saveState, setSaveState] = useState(SaveState.NONE);
   const [firstRender, setFirstRender] = useState(true);
@@ -70,6 +71,12 @@ export default function EditBombClient({ bomb: initialBomb, updateBomb }: Props)
   // TODO(connor): tailwind prettier import sorting + classname sorting
   // TODO(connor): more responsive for different screen heights and widths?
   // TODO(connor): confetti custom image upload, different types like cannon or rain - https://www.kirilv.com/canvas-confetti/
+  // TODO(connor): confetti triple blast
+
+  // TODO(connor): shitty work around color compact picker being closure
+  useEffect(() => {
+    selectedColorIdxRef.current = selectedColorIdx;
+  }, [selectedColorIdx]);
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
@@ -131,7 +138,7 @@ export default function EditBombClient({ bomb: initialBomb, updateBomb }: Props)
         <div>
           <P bold>Logo Upload</P>
           <HFlex itemsCenter className="gap-2">
-            {bomb.iconBlobUrl ? (
+            {bomb.iconBlobUrl && (
               <>
                 <div className="w-[150px] h-[75px] relative">
                   <Image alt="logo" src={bomb.iconBlobUrl} layout="fill" objectFit="contain" />
@@ -151,8 +158,6 @@ export default function EditBombClient({ bomb: initialBomb, updateBomb }: Props)
                   Remove Logo
                 </Button>
               </>
-            ) : (
-              <P>No Logo Uploaded</P>
             )}
             <FileUpload bombId={bomb.id} uploadType={UploadType.LOGO} setBomb={setBomb} />
           </HFlex>
@@ -187,17 +192,16 @@ export default function EditBombClient({ bomb: initialBomb, updateBomb }: Props)
             <Compact
               className="!w-[245px]"
               color={bomb.confettiColors[selectedColorIdx]}
-              onChange={(color) => {
-                // TODO(connor): broken, takes old selectedColorIdx for some reason..
-                setBomb((prev: Bomb) => {
+              onChange={(color) =>
+                setBomb((prev) => {
+                  const newColors = [...prev.confettiColors];
+                  newColors[selectedColorIdxRef.current] = color.hex;
                   return {
                     ...prev,
-                    confettiColors: prev.confettiColors.map((c, idx) => {
-                      return idx === selectedColorIdx ? color.hex : c;
-                    }),
+                    confettiColors: newColors,
                   };
-                });
-              }}
+                })
+              }
             />
           </HFlex>
           <div>
@@ -260,10 +264,14 @@ export default function EditBombClient({ bomb: initialBomb, updateBomb }: Props)
         </HFlex>
       </VFlex>
       <HFlex className="p-4 w-full justify-center bg-base-200">
-        <div
-          className="unreset-css aspect-[8.5/11] bg-white p-4"
-          dangerouslySetInnerHTML={{ __html: bomb.textContent }}
-        />
+        <div className="unreset-css w-[850px] h-[1100px] bg-white p-4">
+          {bomb.iconBlobUrl && (
+            <div className="w-[200px] h-[100px] relative float-right">
+              <Image alt="logo" src={bomb.iconBlobUrl} layout="fill" objectFit="contain" />
+            </div>
+          )}
+          <div dangerouslySetInnerHTML={{ __html: bomb.textContent }} />
+        </div>
       </HFlex>
     </HFlex>
   );
