@@ -31,6 +31,7 @@ export default async function Home() {
   }
 
   // TODO(connor): use fa bomb icon on select
+  // TODO(connor): home page, preview/share page, envelope animation (youtube it)
   if (!user) {
     return <Error message="User not found" />;
   }
@@ -48,9 +49,9 @@ export default async function Home() {
         fileName: "Untitled",
         textContent: "",
         iconBlobUrl: "",
-        confettiColors: ["#ff0000", "#00ff00", "#0000ff"],
-        confettiNumber: 100,
-        confettiRadius: 5,
+        confettiColors: ["#F44E3B", "#FE9200", "#FCDC00"],
+        confettiNumber: 300,
+        confettiRadius: 7,
         author: {
           connect: {
             id: user?.id,
