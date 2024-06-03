@@ -15,7 +15,6 @@ import {
   Redo,
   Code,
 } from "lucide-react";
-import { cn } from "@/utils";
 
 function activeStyling(editor: Editor, type: string, options?: { level: number }) {
   return editor?.isActive(type, options)
@@ -80,7 +79,24 @@ export default function Toolbar({ editor }: Props) {
         >
           <Heading2 className="w-5 h-5" />
         </button>
-
+        <button
+          onClick={() => editor.chain().focus().setTextAlign("left").run()}
+          className={editor.isActive({ textAlign: "left" }) ? "is-active" : ""}
+        >
+          left
+        </button>
+        <button
+          onClick={() => editor.chain().focus().setTextAlign("center").run()}
+          className={editor.isActive({ textAlign: "center" }) ? "is-active" : ""}
+        >
+          center
+        </button>
+        <button
+          onClick={() => editor.chain().focus().setTextAlign("right").run()}
+          className={editor.isActive({ textAlign: "right" }) ? "is-active" : ""}
+        >
+          right
+        </button>
         <button
           onClick={(e) => {
             e.preventDefault();

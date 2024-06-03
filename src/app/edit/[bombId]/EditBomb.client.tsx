@@ -72,6 +72,7 @@ export default function EditBombClient({ bomb: initialBomb, updateBomb }: Props)
   // TODO(connor): more responsive for different screen heights and widths?
   // TODO(connor): confetti custom image upload, different types like cannon or rain - https://www.kirilv.com/canvas-confetti/
   // TODO(connor): confetti triple blast
+  // TODO(connor): make preview open in new tab and do the whole animation
 
   // TODO(connor): shitty work around color compact picker being closure
   useEffect(() => {
@@ -250,7 +251,7 @@ export default function EditBombClient({ bomb: initialBomb, updateBomb }: Props)
               });
             }}
           >
-            Test Confetti
+            Preview
           </Button>
           <Button
             outline
@@ -266,7 +267,7 @@ export default function EditBombClient({ bomb: initialBomb, updateBomb }: Props)
       <HFlex className="p-4 w-full justify-center bg-base-200">
         <div className="unreset-css w-[850px] h-[1100px] bg-white p-4">
           {bomb.iconBlobUrl && (
-            <div className="w-[200px] h-[100px] relative float-right">
+            <div className="w-[200px] h-[100px] relative ml-auto">
               <Image alt="logo" src={bomb.iconBlobUrl} layout="fill" objectFit="contain" />
             </div>
           )}

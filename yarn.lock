@@ -517,6 +517,11 @@
   resolved "https://registry.yarnpkg.com/@tiptap/extension-strike/-/extension-strike-2.4.0.tgz#f09c4f51f7fed01c356026d7e8d8a1d1f2ac8f18"
   integrity sha512-pE1uN/fQPOMS3i+zxPYMmPmI3keubnR6ivwM+KdXWOMnBiHl9N4cNpJgq1n2eUUGKLurC2qrQHpnVyGAwBS6Vg==
 
+"@tiptap/extension-text-align@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-text-align/-/extension-text-align-2.4.0.tgz#15bda62a8f0d0feaede0632a15fb2d032ff81754"
+  integrity sha512-wpRe2OiLXTK4kTy4RZEPnPjFbK16kYHPAx1552hLXrOdyxbS7Sdbo+w4x7aGLLZZqZdudCFfkdtnqrc7PDVZdA==
+
 "@tiptap/extension-text-style@^2.4.0":
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@tiptap/extension-text-style/-/extension-text-style-2.4.0.tgz#9f86d8de4606bc37090b7b02c2aaf40bb37a860f"

@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 import Button from "@/components/Button";
 import HFlex from "@/components/HFlex";
-import { H5 } from "@/components/Text";
+import { H5, P } from "@/components/Text";
 import VFlex from "@/components/VFlex";
 import Link from "next/link";
 import prisma from "@/lib/prisma";
@@ -81,7 +81,7 @@ export default async function Home() {
               className="mt-4 h-60 aspect-[8.5/11] btn-outline btn btn-primary"
               key={index}
             >
-              <div>{bomb.fileName}</div>
+              <P>{bomb.fileName}</P>
             </Link>
           ))}
         </HFlex>
