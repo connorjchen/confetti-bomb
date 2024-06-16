@@ -7,7 +7,6 @@ import { P } from "@/components/Text";
 import VFlex from "@/components/VFlex";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import JSConfetti from "js-confetti";
 import { Compact } from "@uiw/react-color";
 import ColorCircle from "@/components/ColorCircle";
 import Button from "@/components/Button";
@@ -17,6 +16,7 @@ import { faHourglassStart, faCircleCheck, faTriangleExclamation } from "@fortawe
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { cn } from "@/utils";
 import { debounce } from "lodash";
+import Link from "next/link";
 
 enum SaveState {
   SAVING,
@@ -237,27 +237,14 @@ export default function EditBombClient({ bomb: initialBomb, updateBomb }: Props)
           </div>
         </VFlex>
         <HFlex className="gap-4">
-          <Button
-            outline
-            className="btn-primary"
-            onClick={() => {
-              new JSConfetti().addConfetti({
-                confettiNumber: bomb.confettiNumber,
-                confettiRadius: bomb.confettiRadius,
-                confettiColors: bomb.confettiColors,
-                // TODO(connor): can add emoji but cannot be used with confettiColors
-                // emojis: ["🎓"], // emojis
-                // emojiSize: 40, // size of emoji
-              });
-            }}
-          >
+          <Link href={`/view/${bomb.id}`} className="btn btn-primary btn-outline">
             Preview
-          </Button>
+          </Link>
           <Button
             outline
             className="btn-secondary"
             onClick={() => {
-              console.log("Copy Link to Share");
+              navigator.clipboard.writeText(`${window.location.origin}/view/${bomb.id}`);
             }}
           >
             Copy Link to Share
