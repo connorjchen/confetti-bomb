@@ -1,6 +1,6 @@
 import Error from "@/components/Error";
 import prisma from "@/lib/prisma";
-import ViewBomb from "./ViewBomb.client";
+import ViewBombClient from "./ViewBomb.client";
 
 type Props = {
   params: {
@@ -8,7 +8,7 @@ type Props = {
   };
 };
 
-export default async function EditBomb({ params }: Props) {
+export default async function ViewBomb({ params }: Props) {
   const bomb = await prisma.bomb.findUnique({
     where: {
       id: params.bombId,
@@ -19,6 +19,5 @@ export default async function EditBomb({ params }: Props) {
     return <Error message="Bomb not found" />;
   }
 
-  return <ViewBomb bomb={bomb} />;
+  return <ViewBombClient bomb={bomb} />;
 }
-// Open envelope animation, option to choose text color, logo stamp in corner, name address, text, confetti image, confetti speed and duration

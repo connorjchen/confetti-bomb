@@ -7,8 +7,12 @@ export default function AuthButton() {
   const session = useSession();
 
   return session?.data?.user ? (
-    <Button onClick={async () => await signOut()}>Sign Out</Button>
+    <Button outline onClick={async () => await signOut()}>
+      Sign Out
+    </Button>
   ) : (
-    <Button onClick={async () => await signIn()}>Sign In</Button>
+    <Button outline onClick={async () => await signIn()}>
+      Sign In
+    </Button>
   );
 }

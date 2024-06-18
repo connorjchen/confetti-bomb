@@ -2,6 +2,8 @@ import Error from "@/components/Error";
 import prisma from "@/lib/prisma";
 import EditBombClient from "./EditBomb.client";
 import { Bomb } from "@prisma/client";
+import NavBar from "@/components/NavBar";
+import VFlex from "@/components/VFlex";
 
 type Props = {
   params: {
@@ -20,6 +22,7 @@ async function updateBomb(bomb: Bomb): Promise<boolean> {
         fileName: bomb.fileName,
         textContent: bomb.textContent,
         iconBlobUrl: bomb.iconBlobUrl,
+        backgroundColor: bomb.backgroundColor,
         confettiColors: bomb.confettiColors,
         confettiNumber: bomb.confettiNumber,
         confettiRadius: bomb.confettiRadius,
@@ -43,6 +46,10 @@ export default async function EditBomb({ params }: Props) {
     return <Error message="Bomb not found" />;
   }
 
-  return <EditBombClient bomb={bomb} updateBomb={updateBomb} />;
+  return (
+    <VFlex className="h-full">
+      <NavBar />
+      <EditBombClient bomb={bomb} updateBomb={updateBomb} />
+    </VFlex>
+  );
 }
-// Open envelope animation, option to choose text color, logo stamp in corner, name address, text, confetti image, confetti speed and duration

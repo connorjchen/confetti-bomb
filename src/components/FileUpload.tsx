@@ -51,7 +51,9 @@ export default function FileUpload({ bombId, uploadType, setBomb }: Props) {
         onChange={uploadFile}
         className="hidden"
       />
-      <Button onClick={() => inputFileRef.current?.click()}>Upload</Button>
+      <Button outline onClick={() => inputFileRef.current?.click()}>
+        Upload
+      </Button>
     </div>
   );
 }

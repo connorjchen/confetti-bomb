@@ -7,7 +7,7 @@ import { P } from "@/components/Text";
 import VFlex from "@/components/VFlex";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { Compact } from "@uiw/react-color";
+import { Colorful, Compact } from "@uiw/react-color";
 import ColorCircle from "@/components/ColorCircle";
 import Button from "@/components/Button";
 import { Bomb } from "@prisma/client";
@@ -17,6 +17,8 @@ import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { cn } from "@/utils";
 import { debounce } from "lodash";
 import Link from "next/link";
+import ViewBombClient from "@/app/view/[bombId]/ViewBomb.client";
+import JSConfetti from "js-confetti";
 
 enum SaveState {
   SAVING,
@@ -73,8 +75,9 @@ export default function EditBombClient({ bomb: initialBomb, updateBomb }: Props)
   // TODO(connor): confetti custom image upload, different types like cannon or rain - https://www.kirilv.com/canvas-confetti/
   // TODO(connor): confetti triple blast
   // TODO(connor): make preview open in new tab and do the whole animation
+  // TODO(connor): preview the confetti size and quantity easier on the edit page - slider and debounce shoot confetti
 
-  // TODO(connor): shitty work around color compact picker being closure
+  // Work around color compact picker being closure
   useEffect(() => {
     selectedColorIdxRef.current = selectedColorIdx;
   }, [selectedColorIdx]);
@@ -112,10 +115,10 @@ export default function EditBombClient({ bomb: initialBomb, updateBomb }: Props)
 
   return (
     <HFlex className="h-full">
-      <VFlex className="p-4 w-1/3 max-w-lg bg-base-300 gap-4">
+      <VFlex className="p-4 w-1/3 max-w-lg bg-base-200 gap-4">
         <div>
           <HFlex className="justify-between">
-            <P bold>File Name</P>
+            <P bold>Name</P>
             {saveState !== SaveState.NONE && (
               <HFlex itemsCenter className={cn("gap-2", saveStateMap[saveState].color)}>
                 <FontAwesomeIcon icon={saveStateMap[saveState].icon} />
@@ -126,6 +129,7 @@ export default function EditBombClient({ bomb: initialBomb, updateBomb }: Props)
           <Input
             type="text"
             value={bomb.fileName}
+            className="w-full"
             onChange={(e) =>
               setBomb((prev) => {
                 return {
@@ -178,6 +182,22 @@ export default function EditBombClient({ bomb: initialBomb, updateBomb }: Props)
           />
         </div>
         <VFlex className="gap-2">
+          <P bold>Background Color</P>
+          <HFlex className="gap-2">
+            <Colorful
+              color={bomb.backgroundColor}
+              onChange={(color) =>
+                setBomb((prev) => {
+                  return {
+                    ...prev,
+                    backgroundColor: color.hex,
+                  };
+                })
+              }
+            />
+          </HFlex>
+        </VFlex>
+        <VFlex className="gap-4">
           <P bold>Confetti Settings</P>
           <HFlex className="gap-2">
             <div>
@@ -205,10 +225,13 @@ export default function EditBombClient({ bomb: initialBomb, updateBomb }: Props)
               }
             />
           </HFlex>
-          <div>
+          <HFlex itemsCenter className="gap-2">
             <P>Size</P>
             <Input
-              type="number"
+              type="range"
+              min={5}
+              max={13}
+              className="w-48 range-xs"
               value={bomb.confettiRadius}
               onChange={(e) =>
                 setBomb((prev) => {
@@ -219,11 +242,14 @@ export default function EditBombClient({ bomb: initialBomb, updateBomb }: Props)
                 })
               }
             />
-          </div>
-          <div>
+          </HFlex>
+          <HFlex itemsCenter className="gap-2">
             <P>Quantity</P>
             <Input
-              type="number"
+              type="range"
+              min={200}
+              max={800}
+              className="w-48 range-xs"
               value={bomb.confettiNumber}
               onChange={(e) =>
                 setBomb((prev) => {
@@ -234,12 +260,22 @@ export default function EditBombClient({ bomb: initialBomb, updateBomb }: Props)
                 })
               }
             />
-          </div>
+          </HFlex>
         </VFlex>
         <HFlex className="gap-4">
-          <Link href={`/view/${bomb.id}`} className="btn btn-primary btn-outline">
-            Preview
-          </Link>
+          <Button
+            outline
+            className="btn-primary"
+            onClick={() => {
+              new JSConfetti().addConfetti({
+                confettiNumber: bomb.confettiNumber,
+                confettiRadius: bomb.confettiRadius,
+                confettiColors: bomb.confettiColors,
+              });
+            }}
+          >
+            Preview Confetti
+          </Button>
           <Button
             outline
             className="btn-secondary"
@@ -251,16 +287,7 @@ export default function EditBombClient({ bomb: initialBomb, updateBomb }: Props)
           </Button>
         </HFlex>
       </VFlex>
-      <HFlex className="p-4 w-full justify-center bg-base-200">
-        <div className="unreset-css w-[850px] h-[1100px] bg-white p-4">
-          {bomb.iconBlobUrl && (
-            <div className="w-[200px] h-[100px] relative ml-auto">
-              <Image alt="logo" src={bomb.iconBlobUrl} layout="fill" objectFit="contain" />
-            </div>
-          )}
-          <div dangerouslySetInnerHTML={{ __html: bomb.textContent }} />
-        </div>
-      </HFlex>
+      <ViewBombClient bomb={bomb} />
     </HFlex>
   );
 }

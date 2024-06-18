@@ -14,6 +14,9 @@ import {
   Undo,
   Redo,
   Code,
+  AlignRight,
+  AlignLeft,
+  AlignCenter,
 } from "lucide-react";
 
 function activeStyling(editor: Editor, type: string, options?: { level: number }) {
@@ -83,19 +86,19 @@ export default function Toolbar({ editor }: Props) {
           onClick={() => editor.chain().focus().setTextAlign("left").run()}
           className={editor.isActive({ textAlign: "left" }) ? "is-active" : ""}
         >
-          left
+          <AlignLeft className="w-5 h-5" />
         </button>
         <button
           onClick={() => editor.chain().focus().setTextAlign("center").run()}
           className={editor.isActive({ textAlign: "center" }) ? "is-active" : ""}
         >
-          center
+          <AlignCenter className="w-5 h-5" />
         </button>
         <button
           onClick={() => editor.chain().focus().setTextAlign("right").run()}
           className={editor.isActive({ textAlign: "right" }) ? "is-active" : ""}
         >
-          right
+          <AlignRight className="w-5 h-5" />
         </button>
         <button
           onClick={(e) => {

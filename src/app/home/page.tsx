@@ -7,6 +7,7 @@ import Link from "next/link";
 import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import Error from "@/components/Error";
+import NavBar from "@/components/NavBar";
 
 export default async function Home() {
   const session = await auth();
@@ -15,7 +16,11 @@ export default async function Home() {
       email: session?.user?.email || "",
     },
     include: {
-      bombs: true,
+      bombs: {
+        orderBy: {
+          updatedAt: "desc",
+        },
+      },
     },
   });
   if (!user && session?.user?.email) {
@@ -25,7 +30,11 @@ export default async function Home() {
         email: session.user.email,
       },
       include: {
-        bombs: true,
+        bombs: {
+          orderBy: {
+            updatedAt: "desc",
+          },
+        },
       },
     });
   }
@@ -49,9 +58,10 @@ export default async function Home() {
         fileName: "Untitled",
         textContent: "",
         iconBlobUrl: "",
-        confettiColors: ["#F44E3B", "#FE9200", "#FCDC00"],
-        confettiNumber: 300,
-        confettiRadius: 7,
+        backgroundColor: "#fedfff",
+        confettiColors: ["#fe9200", "#aea1ff", "#7b64ff"],
+        confettiNumber: 500,
+        confettiRadius: 9,
         author: {
           connect: {
             id: user?.id,
@@ -64,6 +74,7 @@ export default async function Home() {
 
   return (
     <VFlex>
+      <NavBar />
       <div className="bg-base-200 p-4">
         <div className="container mx-auto">
           <H5>Start New Project</H5>

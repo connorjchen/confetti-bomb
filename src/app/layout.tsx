@@ -16,7 +16,6 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="light">
       <body className="flex flex-col h-screen">
-        <NavBar />
         <div className="grow">{children}</div>
       </body>
     </html>

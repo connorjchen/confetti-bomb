@@ -14,6 +14,7 @@ model Bomb {
   fileName     String     @default("Untitled")
   textContent   String
   iconBlobUrl       String     @map("icon_blob_url")
+  backgroundColor String @map("background_color")
   confettiColors    String[] @map("confetti_colors")
   confettiNumber    Int @map("confetti_number")
   confettiRadius    Int @map(name: "confetti_radius")

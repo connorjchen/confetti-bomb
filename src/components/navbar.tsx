@@ -3,9 +3,9 @@ import AuthButton from "./AuthButton/AuthButton.server";
 
 export default function NavBar() {
   return (
-    <div className="navbar top-0 mb-1 flex justify-between">
+    <div className="navbar top-0 flex justify-between bg-base-200">
       <Link href="/home">
-        <button className="btn">ConfettiBomb.me</button>
+        <button className="btn btn-outline">ConfettiBomb.me</button>
       </Link>
       <AuthButton />
     </div>
