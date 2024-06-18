@@ -1,6 +1,6 @@
 # ConfettiBomb.me
 
-This is a Next.js project (frontend, backend) with Prisma ORM, Vercel DB (Postgres). It is deployed in Vercel.
+This is a Next.js project (frontend, backend) with Prisma ORM, Vercel DB (Postgres), Vercel Blob Storage. It is deployed in Vercel.
 
 ## Useful Commands
 

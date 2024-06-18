@@ -6,8 +6,8 @@ export const BASE_PATH = "/api/auth";
 const authOptions: NextAuthConfig = {
   providers: [
     GoogleProvider({
-      // TODO(connor): https://console.cloud.google.com/apis/credentials?project=intense-crow-423719-u1
-      clientId: process.env.GOOGLE_CLIENT_ID, // TODO(connor): will need to add prod url to authorized redirect URI on Oauth client id
+      // https://console.cloud.google.com/apis/credentials?project=intense-crow-423719-u1
+      clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       authorization: {
         params: {
