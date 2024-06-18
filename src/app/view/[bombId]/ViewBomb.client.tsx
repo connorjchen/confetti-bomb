@@ -1,7 +1,7 @@
 "use client";
 import { Bomb } from "@prisma/client";
 import Letter from "@/components/Letter";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect } from "react";
 import JSConfetti from "js-confetti";
 import { usePathname } from "next/navigation";
@@ -10,16 +10,16 @@ type Props = {
   bomb: Bomb;
 };
 
+// TODO(connor): THIS IS THE MOST IMPORTANT PART OF THE PROJECT
 export default function ViewBombClient({ bomb }: Props) {
   // TODO(connor): dark lights (spotlights like a club) and then rise and shine with open envelope
   // TODO(connor): ideally it shows a button or envelope that you click on to animate all of this
-  // TODO(connor): add "page background hex color" to bomb that they can choose
+  // TODO(connor): imitate brawl squad strike box open? like a letter or tresaure chest - when click, it spins around 360 and opens on top with the letter coming out like a gem
+  // TODO(connor): confetti comes directly out of box too -- copy gsap envelope example ?
   const pathname = usePathname();
 
   useEffect(() => {
     const jsConfetti = new JSConfetti();
-    // TODO(connor): if pathname is view, then go crazy on this
-    // TODO(connor): if pathname is edit, trigger only one? but not on initial load?
     async function launchConfetti() {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
