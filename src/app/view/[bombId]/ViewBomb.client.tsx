@@ -12,8 +12,8 @@ type Props = {
   bomb: Bomb;
 };
 
+// TODO(connor): make all pages mobile friendly
 export default function ViewBombClient({ bomb }: Props) {
-  // TODO(connor): make everything on click - use a usestate and trigger dynamic styling with transitoin
   const [letterOpen, setLetterOpen] = useState(false);
   const [hideEnvelope, setHideEnvelope] = useState(false);
 
@@ -39,7 +39,6 @@ export default function ViewBombClient({ bomb }: Props) {
   }, [bomb, letterOpen]);
 
   // TODO(connor): initial before click, dark and top theatre light on letter and then fade in custom color
-  // TODO(connor): make it more epic - this is the money shot
 
   // Z index animation weird with Framer Motion? Super hacky
   useEffect(() => {
