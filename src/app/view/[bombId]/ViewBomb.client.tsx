@@ -4,7 +4,6 @@ import Letter from "@/components/Letter";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import JSConfetti from "js-confetti";
-import { usePathname } from "next/navigation";
 import { cn } from "@/utils";
 import waxSeal from "@/images/waxSeal.png";
 import Image from "next/image";
@@ -15,7 +14,6 @@ type Props = {
 
 export default function ViewBombClient({ bomb }: Props) {
   // TODO(connor): make everything on click - use a usestate and trigger dynamic styling with transitoin
-  const pathname = usePathname();
   const [letterOpen, setLetterOpen] = useState(false);
   const [hideEnvelope, setHideEnvelope] = useState(false);
 
@@ -35,13 +33,13 @@ export default function ViewBombClient({ bomb }: Props) {
       }
     }
 
-    if (pathname.startsWith("/view") && letterOpen) {
+    if (letterOpen) {
       launchConfetti();
     }
-  }, [bomb, pathname, letterOpen]);
+  }, [bomb, letterOpen]);
 
-  // TODO(connor): initial before click, dark and spotlights on the letter and then fade in my color
-  // TODO(connor): refactor to see envelope, letter, etc. as separate components
+  // TODO(connor): initial before click, dark and top theatre light on letter and then fade in custom color
+  // TODO(connor): make it more epic - this is the money shot
 
   // Z index animation weird with Framer Motion? Super hacky
   useEffect(() => {
@@ -54,13 +52,10 @@ export default function ViewBombClient({ bomb }: Props) {
     <motion.div
       className="flex h-full justify-center w-full items-center"
       style={{ backgroundColor: bomb.backgroundColor }}
-      // transition={{ duration: 3 }}
-      // initial={{ backgroundColor: "#ffffff" }}
-      // animate={{ backgroundColor: bomb.backgroundColor }}
     >
       <div
         key="envelope-background"
-        className={cn("h-[300px] w-[400px] bg-[#eee] flex justify-center relative rounded-b-xl", {
+        className={cn("h-[300px] w-[400px] bg-[#eee] flex justify-center relative rounded-b-xl drop-shadow-2xl", {
           "cursor-pointer": !letterOpen,
         })}
         onClick={() => setLetterOpen(true)}
@@ -70,7 +65,7 @@ export default function ViewBombClient({ bomb }: Props) {
           className="origin-top
            top-0 left-0 absolute border-solid border-t-[150px] border-r-[200px] border-b-[150px] border-l-[200px] border-transparent border-t-[#eee]"
           animate={{
-            transform: letterOpen ? "rotateX(180deg)" : "rotateX(0deg",
+            transform: letterOpen ? "rotateX(180deg)" : "",
             transition: { duration: 0.7, delay: 0.5 },
           }}
         />
@@ -78,7 +73,9 @@ export default function ViewBombClient({ bomb }: Props) {
           key="envelope-front"
           className={cn(
             "z-[5] rounded-b-xl border-solid border-t-[150px] border-r-[200px] border-b-[150px] border-l-[200px] border-t-transparent border-r-[#ddd] border-b-[#ccc] border-l-[#ccc]",
-            { "z-0": hideEnvelope }
+            {
+              "z-0": hideEnvelope,
+            }
           )}
         />
         <motion.div
@@ -93,21 +90,21 @@ export default function ViewBombClient({ bomb }: Props) {
         >
           <Image src={waxSeal} alt="" />
         </motion.div>
+        {letterOpen && (
+          <motion.div
+            key="letter"
+            className="absolute z-[2]"
+            animate={{ y: [-300, -820, -400], scale: [0, 0.47, 1] }}
+            transition={{
+              duration: 4,
+              delay: 0.5,
+              times: [0, 0.5, 1],
+            }}
+          >
+            <Letter bomb={bomb} />
+          </motion.div>
+        )}
       </div>
-      {letterOpen && (
-        <motion.div
-          key="letter"
-          className="absolute"
-          animate={{ y: [100, -420, 0], scale: [0, 0.47, 1] }}
-          transition={{
-            duration: 4,
-            delay: 0.5,
-            times: [0, 0.5, 1],
-          }}
-        >
-          <Letter bomb={bomb} />
-        </motion.div>
-      )}
     </motion.div>
   );
 }

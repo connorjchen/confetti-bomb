@@ -19,6 +19,7 @@ import { debounce } from "lodash";
 import ViewBombClient from "@/app/view/[bombId]/ViewBomb.client";
 import JSConfetti from "js-confetti";
 import { todo } from "node:test";
+import Letter from "@/components/Letter";
 
 enum SaveState {
   SAVING,
@@ -284,7 +285,9 @@ export default function EditBombClient({ bomb: initialBomb, updateBomb }: Props)
           </Button>
         </HFlex>
       </VFlex>
-      <ViewBombClient bomb={bomb} />
+      <div className="flex h-full justify-center w-full items-center" style={{ backgroundColor: bomb.backgroundColor }}>
+        <Letter bomb={bomb} />
+      </div>
     </HFlex>
   );
 }
