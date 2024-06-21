@@ -39,8 +39,6 @@ export default async function Home() {
     });
   }
 
-  // TODO(connor): use fa bomb icon on select
-  // TODO(connor): home page, preview/share page, envelope animation (youtube it)
   if (!user) {
     return <Error message="User not found" />;
   }

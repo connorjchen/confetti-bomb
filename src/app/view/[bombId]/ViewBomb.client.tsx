@@ -12,7 +12,6 @@ type Props = {
   bomb: Bomb;
 };
 
-// TODO(connor): make all pages mobile friendly
 export default function ViewBombClient({ bomb }: Props) {
   const [letterOpen, setLetterOpen] = useState(false);
   const [hideEnvelope, setHideEnvelope] = useState(false);
@@ -37,8 +36,6 @@ export default function ViewBombClient({ bomb }: Props) {
       launchConfetti();
     }
   }, [bomb, letterOpen]);
-
-  // TODO(connor): initial before click, dark and top theatre light on letter and then fade in custom color
 
   // Z index animation weird with Framer Motion? Super hacky
   useEffect(() => {

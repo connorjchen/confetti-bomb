@@ -5,7 +5,6 @@ export const config = {
   matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };
 
-// TODO(connor): how are api endpoints protected from unauthenticated users?
 // Require authentication for all routes except /api, /_next/static, /_next/image, /favicon.ico, /view, and /.
 export default auth((req) => {
   const reqUrl = new URL(req.url);
