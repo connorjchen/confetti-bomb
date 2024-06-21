@@ -1,4 +1,4 @@
-import NextAuth, { User, NextAuthConfig } from "next-auth";
+import NextAuth, { NextAuthConfig } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
 export const BASE_PATH = "/api/auth";
