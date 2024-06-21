@@ -2,54 +2,112 @@
 import { Bomb } from "@prisma/client";
 import Letter from "@/components/Letter";
 import { motion } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import JSConfetti from "js-confetti";
 import { usePathname } from "next/navigation";
+import { cn } from "@/utils";
+import waxSeal from "@/images/waxSeal.png";
+import Image from "next/image";
 
 type Props = {
   bomb: Bomb;
 };
 
-// TODO(connor): THIS IS THE MOST IMPORTANT PART OF THE PROJECT
 export default function ViewBombClient({ bomb }: Props) {
-  // TODO(connor): dark lights (spotlights like a club) and then rise and shine with open envelope
-  // TODO(connor): ideally it shows a button or envelope that you click on to animate all of this
-  // TODO(connor): imitate brawl squad strike box open? like a letter or tresaure chest - when click, it spins around 360 and opens on top with the letter coming out like a gem
-  // TODO(connor): confetti comes directly out of box too -- copy gsap envelope example ?
+  // TODO(connor): make everything on click - use a usestate and trigger dynamic styling with transitoin
   const pathname = usePathname();
+  const [letterOpen, setLetterOpen] = useState(false);
+  const [hideEnvelope, setHideEnvelope] = useState(false);
 
   useEffect(() => {
     const jsConfetti = new JSConfetti();
     async function launchConfetti() {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < 5; i++) {
         jsConfetti.addConfetti({
           confettiNumber: bomb.confettiNumber,
           confettiRadius: bomb.confettiRadius,
           confettiColors: bomb.confettiColors,
         });
 
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 800));
       }
     }
 
-    if (pathname.startsWith("/view")) {
+    if (pathname.startsWith("/view") && letterOpen) {
       launchConfetti();
     }
-  }, [bomb, pathname]);
+  }, [bomb, pathname, letterOpen]);
+
+  // TODO(connor): initial before click, dark and spotlights on the letter and then fade in my color
+  // TODO(connor): refactor to see envelope, letter, etc. as separate components
+
+  // Z index animation weird with Framer Motion? Super hacky
+  useEffect(() => {
+    if (letterOpen) {
+      setTimeout(() => setHideEnvelope(true), 2000);
+    }
+  }, [letterOpen]);
 
   return (
     <motion.div
-      key={pathname}
-      className="flex h-full justify-center items-center w-full"
-      transition={{ duration: 3 }}
-      initial={{ backgroundColor: "#ffffff" }}
-      animate={{ backgroundColor: bomb.backgroundColor }}
+      className="flex h-full justify-center w-full items-center"
+      style={{ backgroundColor: bomb.backgroundColor }}
+      // transition={{ duration: 3 }}
+      // initial={{ backgroundColor: "#ffffff" }}
+      // animate={{ backgroundColor: bomb.backgroundColor }}
     >
-      <motion.div initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 2 }}>
-        <Letter bomb={bomb} />
-      </motion.div>
+      <div
+        key="envelope-background"
+        className={cn("h-[300px] w-[400px] bg-[#eee] flex justify-center relative rounded-b-xl", {
+          "cursor-pointer": !letterOpen,
+        })}
+        onClick={() => setLetterOpen(true)}
+      >
+        <motion.div
+          key="envelope-lid"
+          className="origin-top
+           top-0 left-0 absolute border-solid border-t-[150px] border-r-[200px] border-b-[150px] border-l-[200px] border-transparent border-t-[#eee]"
+          animate={{
+            transform: letterOpen ? "rotateX(180deg)" : "rotateX(0deg",
+            transition: { duration: 0.7, delay: 0.5 },
+          }}
+        />
+        <motion.div
+          key="envelope-front"
+          className={cn(
+            "z-[5] rounded-b-xl border-solid border-t-[150px] border-r-[200px] border-b-[150px] border-l-[200px] border-t-transparent border-r-[#ddd] border-b-[#ccc] border-l-[#ccc]",
+            { "z-0": hideEnvelope }
+          )}
+        />
+        <motion.div
+          key="wax-seal"
+          className="absolute top-[120px] z-10 w-[50px] h-[50px]"
+          animate={{
+            opacity: letterOpen ? 0 : 1,
+            transition: {
+              duration: 0.5,
+            },
+          }}
+        >
+          <Image src={waxSeal} alt="" />
+        </motion.div>
+      </div>
+      {letterOpen && (
+        <motion.div
+          key="letter"
+          className="absolute"
+          animate={{ y: [100, -420, 0], scale: [0, 0.47, 1] }}
+          transition={{
+            duration: 4,
+            delay: 0.5,
+            times: [0, 0.5, 1],
+          }}
+        >
+          <Letter bomb={bomb} />
+        </motion.div>
+      )}
     </motion.div>
   );
 }

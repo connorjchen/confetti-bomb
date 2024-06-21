@@ -16,9 +16,9 @@ import { faHourglassStart, faCircleCheck, faTriangleExclamation } from "@fortawe
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { cn } from "@/utils";
 import { debounce } from "lodash";
-import Link from "next/link";
 import ViewBombClient from "@/app/view/[bombId]/ViewBomb.client";
 import JSConfetti from "js-confetti";
+import { todo } from "node:test";
 
 enum SaveState {
   SAVING,
@@ -68,16 +68,13 @@ export default function EditBombClient({ bomb: initialBomb, updateBomb }: Props)
   const [saveState, setSaveState] = useState(SaveState.NONE);
   const [firstRender, setFirstRender] = useState(true);
 
-  // TODO(connor): refactor everything afterwards
-  // TODO(connor): easier to make confetti letter without writing so much text -> openai integration or make text bigger or custom templates
   // TODO(connor): tailwind prettier import sorting + classname sorting
   // TODO(connor): more responsive for different screen heights and widths?
   // TODO(connor): confetti custom image upload, different types like cannon or rain - https://www.kirilv.com/canvas-confetti/
-  // TODO(connor): confetti triple blast
-  // TODO(connor): make preview open in new tab and do the whole animation
   // TODO(connor): preview the confetti size and quantity easier on the edit page - slider and debounce shoot confetti
+  // TODO(connor): it would be a good idea to replace rich text editor with pdf updload
 
-  // Work around color compact picker being closure
+  // Work around color compact picker being a closure
   useEffect(() => {
     selectedColorIdxRef.current = selectedColorIdx;
   }, [selectedColorIdx]);
