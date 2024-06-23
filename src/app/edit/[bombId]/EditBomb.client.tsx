@@ -73,7 +73,7 @@ export default function EditBombClient({ bomb: initialBomb, updateBomb }: Props)
   // -- import sorting + classname sorting
   // -- toast notifications on api errors (unsure if nextjs handles this already)
   // -- different types of confetti https://www.kirilv.com/canvas-confetti/
-  // -- replace rich text editor with pdf upload
+  // -- replace rich text editor with pdf upload -> this will make it much easier to do responsive sizing bc don't need to worry about 8.5/11 ratio + text sizes
   // -- make confetti bomb cooler animation: dark and top theatre spotlight on letter before click
 
   // Work around color compact picker being a closure
