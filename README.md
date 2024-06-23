@@ -15,3 +15,8 @@ Functionality is complete, but suffers from lack of screen size responsiveness.
 ## How to Deploy
 
 - Push changes to main branch and Vercel will auto-deploy it
+
+## Demo
+
+https://github.com/connorjchen/confettibomb.me/assets/67431889/c5829c94-3436-49d2-857d-a2463ab98a91
+
