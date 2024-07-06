@@ -18,5 +18,9 @@ Functionality is complete, but suffers from lack of screen size responsiveness.
 
 ## Demo
 
-https://github.com/connorjchen/confettibomb.me/assets/67431889/c5829c94-3436-49d2-857d-a2463ab98a91
+
+
+https://github.com/connorjchen/confetti-bomb/assets/67431889/a40ee546-5fd6-4e3b-af10-ad55dbe65696
+
+
 
