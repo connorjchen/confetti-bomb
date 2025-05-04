@@ -1,7 +1,7 @@
 # ConfettiBomb.me
 
 > [!WARNING]
-> As of December 7, 2024, the deployed instances of Vercel Postgres and Blob Storage has been removed to allocate towards Snublet since only one can be open at a time on Hobby project plan.
+> As of December 7, 2024, the deployed instances of Vercel Postgres and Blob Storage has been removed to allocate towards Zublet since only one can be open at a time on Hobby project plan.
 
 This is a Next.js project (frontend, backend) with Prisma ORM, Vercel DB (Postgres), Vercel Blob Storage. It is deployed in Vercel.
 
